@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<head>
+        <title>My DataBase</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!--AngularJS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.6/angular-messages.min.js"></script>
+    
+        <!--Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+        <link rel="shortcut icon" href="photos/favicon.ico" type="image/x-icon" />
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <!-- <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" /> -->
+    <!--Firebase and AngularJS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+      <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyC1aWEIcA_We_mvqKDauyzFwEoF3gFnKkg",
+              authDomain: "culinaryschool-c8176.firebaseapp.com",
+              databaseURL: "https://culinaryschool-c8176.firebaseio.com",
+              projectId: "culinaryschool-c8176",
+              storageBucket: "culinaryschool-c8176.appspot.com",
+              messagingSenderId: "64236661875"
+            };
+            firebase.initializeApp(config);
+          </script> 
+       
+    
+    
+        <!--App Stuff-->
+        <script src="app.js"></script>
+        <!-- <script src="page1/page1.js"></script> -->
+        <!-- <script src="page2/page2.js"></script>
+        <script src="page3/page3.js"></script> -->
+        
+<body ng-controller="appCtrl">
+	  <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">My DataBase</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#!/page1">Table</a></li>
+            <li><a href="#!/page2">Add Student</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+        
+        <div class="row">
+          <div class="col-md-3">
+            <h3>Участники:</h3>
+          </div>
+          <div class="col-md-5">
+            <h3>Найти: <input type="text" ng-model="search"> </h3>
+          </div>
+          <div class="col-md-4">
+            <div class="msg1" ng-show="msg1"> <h3>{{msg1}}</h3>  </div>
+          </div>   
+        </div>
+      
+      
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Email</th>
+              <th>Телефон</th>
+              <th width=200 >Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="student in data | filter:search">
+              <td>{{student.firstName}}</td>
+              <td>{{student.lastName}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.phone}}</td>
+              
+              <td>  
+                  <a href="#!/page3/{{student.$id}}" class="btn btn-info">Изменить</a> 
+                  <a href="" ng-click="deleteStudent(student)" class="btn btn-danger">Удалить</a> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+
+
+
+</body>
+</html>
